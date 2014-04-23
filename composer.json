@@ -3,6 +3,7 @@
 	"description": "Custom form builder utility for Laravel applications",
 	"type": "library",
 	"require": {
+		"components/foundation": "5.1.*",
 		"laravel/framework": "4.1.*",
 		"npmweb/client-validation-generator": "dev-master@dev"
 	},
