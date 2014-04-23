@@ -1,0 +1,18 @@
+{
+	"name": "npmweb/laravel-forms",
+	"description": "Custom form builder utility for Laravel applications",
+	"type": "library",
+	"require": {
+		"laravel/framework": "4.1.*",
+		"npmweb/client-validation-generator": "dev-master@dev"
+	},
+	"require-dev": {
+		"mockery/mockery": "dev-master@dev"
+	},
+	"autoload": {
+		"psr-0": {
+			"NpmWeb\\FormBuilder\\": "src/",
+			"NpmWeb\\Test\\": "tests/"
+		}
+	}
+}
