@@ -48,6 +48,7 @@ class FormBuilder
 			// default: do nothing
 		}
 
+		$config = $this->_processOptions($name, $options);
 		return $this->_outputHelper( $fieldname, $config, $value );
 	}
 
