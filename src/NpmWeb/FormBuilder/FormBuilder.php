@@ -177,7 +177,7 @@ class FormBuilder
 			: [];
 
 		if (!array_key_exists('id', $config->extras) ) $config->extras['id'] = esc_attr( $name );
-		if (!array_key_exists('placeholder',$config->extras) ) $config->extras['placeholder'] = self::formatLabel($name,null); // configurable?
+		if (!array_key_exists('placeholder',$config->extras) ) $config->extras['placeholder'] = $config->label; // configurable?
 
 		$config->errors = array_key_exists('errors',$options)
 			? $options['errors']
