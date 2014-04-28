@@ -169,7 +169,7 @@ class FormBuilder
 		$config = new \stdClass();
 		$config->label = ( isset($options['label']) ? 
 							esc_body($options['label']) : 
-							( isset($options['labelHtml']) ? $options['labelHtml'] : $this->label($name) )
+							( isset($options['labelHtml']) ? $options['labelHtml'] : $this->formatLabel($name,null) )
 						);
 		$config->columns_class = ( isset($options['columns_class'] ) ? $options['columns_class'] : $this->default_col_width );
 		$config->extras = array_key_exists('extras',$options)
