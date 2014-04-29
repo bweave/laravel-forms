@@ -208,6 +208,19 @@ class FormBuilder
 		if (array_key_exists('main', $options)) $config->main = $options['main'];
 		if (array_key_exists('postfix', $options)) $config->postfix = $options['postfix'];
 
+		$model = $this->model;
+		if( !array_key_exists( 'maxlength', $config->extras )
+			&& property_exists($model,'rules')
+			&& is_array($model::$rules)
+			&& array_key_exists( $name, $model::$rules ) )
+		{
+			foreach( $model::$rules[$name] as $fieldRule ) {
+				if( FALSE !== strpos($fieldRule,'max:') ) {
+					$config->extras['maxlength'] = substr($fieldRule,4);
+				}
+			}
+		}
+
 		return $config;
 
 	}
