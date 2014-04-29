@@ -136,6 +136,20 @@ class FormBuilder
 			parent::input('tel', $name, $value, $config->extras) );
 	}
 
+	/**
+	 * Create a textarea.
+	 *
+	 * @param  string  $name
+	 * @param  string  $value
+	 * @param  array   $options
+	 * @return string
+	 */
+	public function textarea($name, $value = null, $options = array())
+	{
+		$config = $this->_processOptions($name, $options);
+		return $this->_outputHelper( $name, $config, 
+			parent::textarea($name, $value, $config->extras) );
+	}
 
 	/**
 	 * Create a select box field.
