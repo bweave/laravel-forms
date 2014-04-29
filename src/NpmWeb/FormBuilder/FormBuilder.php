@@ -45,7 +45,9 @@ class FormBuilder
 					$value = '<a href="mailto:'.esc_attr($value).'">'.esc_body($value).'</a>';
 					break;
 				default: // date/time
-					$value = $value->format($format);
+					if( $value ) {
+						$value = $value->format($format);
+					}
 					break;
 			}
 		}
