@@ -35,17 +35,19 @@ class FormBuilder
 
 		// format data
 		$value = $model->$fieldname;
-		$format = array_key_exists('format',$options)
-			? $options['format']
-			: null;
-		switch($format) {
-			case 'url':
-				$value = '<a href="'.esc_attr($value).'">'.esc_body($value).'</a>';
-				break;
-			case 'email': 
-				$value = '<a href="mailto:'.esc_attr($value).'">'.esc_body($value).'</a>';
-				break;
-			// default: do nothing
+		if( array_key_exists('format',$options) ) {
+			$format = $options['format'];
+			switch($format) {
+				case 'url':
+					$value = '<a href="'.esc_attr($value).'">'.esc_body($value).'</a>';
+					break;
+				case 'email': 
+					$value = '<a href="mailto:'.esc_attr($value).'">'.esc_body($value).'</a>';
+					break;
+				default: // date/time
+					$value = $value->format($format);
+					break;
+			}
 		}
 
 		$config = $this->_processOptions($fieldname, $options);
@@ -63,6 +65,25 @@ class FormBuilder
 	public function text($name, $default = null, $options = [])
 	{
 		//Log::debug(__METHOD__.'()');
+
+		if( !$default && array_key_exists('format',$options) ) {
+			$format = $options['format'];
+			$value = $this->model->$name;
+			switch($format) {
+				case 'url':
+					$value = '<a href="'.esc_attr($value).'">'.esc_body($value).'</a>';
+					break;
+				case 'email': 
+					$value = '<a href="mailto:'.esc_attr($value).'">'.esc_body($value).'</a>';
+					break;
+				default: // date/time
+					if( $value ) {
+						$value = $value->format($format);
+					}
+					break;
+			}
+			$default = $value;
+		}
 
 		$config = $this->_processOptions($name, $options);
 		return $this->_outputHelper( $name, $config, parent::text($name, $default, $config->extras) );
