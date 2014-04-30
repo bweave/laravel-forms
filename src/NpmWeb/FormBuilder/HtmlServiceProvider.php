@@ -1,7 +1,7 @@
 <?php namespace NpmWeb\FormBuilder;
 
 class HtmlServiceProvider 
-	extends \NpmWeb\ClientValidationGenerator\Laravel\HtmlServiceProvider
+	extends \NpmWeb\ClientValidationGenerator\Laravel\FoundationHtmlServiceProvider
 {
 
 	protected function createFormBuilder($app) {
