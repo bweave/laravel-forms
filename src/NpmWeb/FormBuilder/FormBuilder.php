@@ -51,6 +51,7 @@ class FormBuilder
 					break;
 			}
 		}
+		$value = '<div>'.$value.'</div>';
 
 		$config = $this->_processOptions($fieldname, $options);
 		return $this->_outputHelper( $fieldname, $config, $value );
@@ -271,7 +272,7 @@ Sample prefixed text input
 		ob_start();
 		?>
 		<div class="<?php echo $config->columns_class ?> columns">
-			<label for="<?php echo $config->extras['id'] ?>"><?php echo $config->label; ?>
+			<label for="<?php echo $config->extras['id'] ?>" <?php if($config->errors->first($fieldname)) { echo 'class="error"'; } ?>><?php echo $config->label; ?>
 			<?php if ( isset($config->prefix) ) { ?>
 			<div class="row collapse">
 				<div class="<?php echo $config->prefix['columns_class'] ?> columns">
