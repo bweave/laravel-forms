@@ -269,18 +269,25 @@ Sample prefixed text input
 
 	protected function _outputHelper( $fieldname, $config, $control ) {
 		//Log::debug(__METHOD__.'('.$fieldname.')');
+		$error = null;
+		if( property_exists($config,'errors')
+			&& is_array($config->errors) ) {
+			$error = $config->errors->first($fieldname);
+		}
 		ob_start();
 		?>
 		<div class="<?php echo $config->columns_class ?> columns">
-			<label for="<?php echo $config->extras['id'] ?>" <?php if($config->errors->first($fieldname)) { echo 'class="error"'; } ?>><?php echo $config->label; ?>
+			<label for="<?php echo $config->extras['id'] ?>" <?php if($error) { echo 'class="error"'; } ?>><?php echo $config->label; ?>
 			<?php if ( isset($config->prefix) ) { ?>
 			<div class="row collapse">
 				<div class="<?php echo $config->prefix['columns_class'] ?> columns">
 					<span class="prefix"><?php echo $config->prefix['label']; ?></span>
 				</div>
 				<div class="<?php echo $config->main['columns_class'] ?> columns"><?php } // end if prefix ?> 
-				<?php echo $control /* pre-escaped */ ?>			
-				<small class="error"><?php echo $config->errors ? esc_body($config->errors->first($fieldname)) : '' ?></small>
+				<?php echo $control /* pre-escaped */ ?>
+				<?php if($error): ?>
+					<small class="error"><?php echo $error ? esc_body($error) : '' ?></small>
+				<?php endif ?>
 			<?php if ( isset($config->prefix) ) { ?>
 				</div>
 			</div><?php } ?>
