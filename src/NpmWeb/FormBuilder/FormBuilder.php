@@ -210,6 +210,7 @@ class FormBuilder
 							( isset($options['labelHtml']) ? $options['labelHtml'] : $this->formatLabel($name,null) )
 						);
 		$config->columns_class = ( isset($options['columns_class'] ) ? $options['columns_class'] : $this->default_col_width );
+		// \Log::debug('processing options for '.$name);
 		$config->extras = array_key_exists('extras',$options)
 			? $options['extras']
 			: [];
@@ -270,8 +271,7 @@ Sample prefixed text input
 	protected function _outputHelper( $fieldname, $config, $control ) {
 		//Log::debug(__METHOD__.'('.$fieldname.')');
 		$error = null;
-		if( property_exists($config,'errors')
-			&& is_array($config->errors) ) {
+		if( property_exists($config,'errors') ) {
 			$error = $config->errors->first($fieldname);
 		}
 		ob_start();
@@ -279,7 +279,7 @@ Sample prefixed text input
 		<div class="<?php echo $config->columns_class ?> columns">
 			<label for="<?php echo $config->extras['id'] ?>" <?php if($error) { echo 'class="error"'; } ?>><?php echo $config->label; ?>
 			<?php if ( isset($config->prefix) ) { ?>
-			<div class="row collapse">
+			<div class="row collapse <?php if($error) { echo 'error'; } ?>">
 				<div class="<?php echo $config->prefix['columns_class'] ?> columns">
 					<span class="prefix"><?php echo $config->prefix['label']; ?></span>
 				</div>
