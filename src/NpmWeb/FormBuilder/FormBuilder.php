@@ -271,7 +271,9 @@ Sample prefixed text input
 	protected function _outputHelper( $fieldname, $config, $control ) {
 		//Log::debug(__METHOD__.'('.$fieldname.')');
 		$error = null;
-		if( property_exists($config,'errors') ) {
+		if( property_exists($config,'errors')
+			&& $config->errors instanceof \Illuminate\Support\MessageBag
+		) {
 			$error = $config->errors->first($fieldname);
 		}
 		ob_start();
