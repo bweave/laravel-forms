@@ -202,6 +202,7 @@ class FormBuilder
 	/**
 	 * Create a single checkbox input field.
 	 *
+	 * @see http://nielson.io/2014/02/handling-checkbox-input-in-laravel/
 	 * @param  string  $name
 	 * @param  mixed   $value
 	 * @param  bool    $checked
@@ -219,6 +220,7 @@ class FormBuilder
 		?>
 		<div class="<?php echo $config->columns_class ?> columns">
 			<label class="radio">
+				<?php echo parent::hidden( $name, false ) ?>
 				<?php echo parent::checkbox( $name, $value, $checked, $options ) ?>
 				<span class="radio"><?php echo $config->label; ?></span>
 			</label>
