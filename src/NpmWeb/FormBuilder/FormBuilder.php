@@ -199,6 +199,35 @@ class FormBuilder
 
 	}
 
+	/**
+	 * Create a single checkbox input field.
+	 *
+	 * @param  string  $name
+	 * @param  mixed   $value
+	 * @param  bool    $checked
+	 * @param  array   $options
+	 * @return string
+	 */
+	public function checkbox($name, $value = 1, $checked = null, $options = array())
+	{
+		//Log::debug(__METHOD__.'()');
+
+		$config = $this->_processOptions($name,$options);
+		//$radioHtml = parent::radio($name, $value, $checked, $config->extras);
+		$id = (array_key_exists('id', $config->extras) ? $config->extras['id'] : esc_attr($name.'_'.$value) );
+		ob_start(); 
+		?>
+		<div class="<?php echo $config->columns_class ?> columns">
+			<label class="radio">
+				<?php echo parent::checkbox( $name, $value, $checked, $options ) ?>
+				<span class="radio"><?php echo $config->label; ?></span>
+			</label>
+		</div>				
+
+		<?php
+		return ob_get_clean();
+
+	}
 
 
 	// go through the options and pull out the pieces we're interested in
