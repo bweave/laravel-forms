@@ -140,6 +140,22 @@ class FormBuilder
 	}
 
 	/**
+	 * Create a number input field.
+	 *
+	 * @param  string  $name
+	 * @param  string  $value
+	 * @param  array   $options
+	 * @return string
+	 */
+	public function number($name, $value = null, $options = array())
+	{
+		//Log::debug(__METHOD__.'()');
+		$config = $this->_processOptions($name, $options);
+		return $this->_outputHelper( $name, $config, 
+			parent::input('number', $name, $value, $config->extras) );
+	}
+
+	/**
 	 * Create a textarea.
 	 *
 	 * @param  string  $name
