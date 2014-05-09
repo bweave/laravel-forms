@@ -1,5 +1,6 @@
 <?php namespace NpmWeb\FormBuilder;
 
+use Config;
 use Log;
 
 class FormBuilder
@@ -7,6 +8,15 @@ class FormBuilder
 {
 	
 	private $default_col_width = 'large-6';
+
+	public function __construct(
+		\Illuminate\Html\HtmlBuilder $html,
+		\Illuminate\Routing\UrlGenerator $url,
+		$csrfToken)
+	{
+		parent::__construct($html,$url,$csrfToken);
+		$this->default_col_width = Config::get('form.col_width');
+	}
 
 	public function setModel( $model ) {
 		Log::debug(__METHOD__.'()');
