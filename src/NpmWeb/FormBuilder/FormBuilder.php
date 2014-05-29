@@ -52,8 +52,10 @@ class FormBuilder
 					if(isset($options['url'])) {
 						$callback = $options['url'];
 						$url = $callback($value);
-						$value = '<a href="'.esc_attr($url).'">'.esc_body($value).'</a>';
+					} else {
+						$url = $value;
 					}
+					$value = '<a href="'.esc_attr($url).'">'.esc_body($value).'</a>';
 					break;
 				case 'email': 
 					$value = '<a href="mailto:'.esc_attr($value).'">'.esc_body($value).'</a>';
