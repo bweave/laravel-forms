@@ -166,6 +166,31 @@ class FormBuilder
 	}
 
 	/**
+	 * Create a file input field.
+	 *
+	 * @param  string  $name
+	 * @param  string  $value
+	 * @param  array   $options
+	 * @return string
+	 */
+	public function file($name, $value = null, $options = array())
+	{
+		//Log::debug(__METHOD__.'()');
+		$config = $this->_processOptions($name, $options);
+		$value = $this->getValueAttribute($name,$value);
+		$input = '';
+		if( $value ) {
+			$input = 'Current: '.$this->getValueAttribute($name,$value);
+			// $model = $this->model;
+			// if already uploaded, not "required" to upload a new one
+			// $model::$rules[$name] = array_diff( $model::$rules[$name], ['required']);
+			// var_dump($model::$rules);exit;
+		}
+		$input .= '<br />Upload New: '.parent::file($name, $config->extras);
+		return $this->_outputHelper( $name, $config, $input );
+	}
+
+	/**
 	 * Create a textarea.
 	 *
 	 * @param  string  $name
