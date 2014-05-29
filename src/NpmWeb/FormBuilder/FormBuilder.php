@@ -49,7 +49,11 @@ class FormBuilder
 			$format = $options['format'];
 			switch($format) {
 				case 'url':
-					$value = '<a href="'.esc_attr($value).'">'.esc_body($value).'</a>';
+					if(isset($options['url'])) {
+						$callback = $options['url'];
+						$url = $callback($value);
+						$value = '<a href="'.esc_attr($url).'">'.esc_body($value).'</a>';
+					}
 					break;
 				case 'email': 
 					$value = '<a href="mailto:'.esc_attr($value).'">'.esc_body($value).'</a>';
@@ -180,7 +184,13 @@ class FormBuilder
 		$value = $this->getValueAttribute($name,$value);
 		$input = '';
 		if( $value ) {
-			$input = 'Current: '.$this->getValueAttribute($name,$value);
+			$value = $this->getValueAttribute($name,$value);
+			if(isset($options['url'])) {
+				$callback = $options['url'];
+				$url = $callback($value);
+				$value = '<a href="'.esc_attr($url).'">'.esc_body($value).'</a>';
+			}
+			$input = 'Current: '.$value;
 			// $model = $this->model;
 			// if already uploaded, not "required" to upload a new one
 			// $model::$rules[$name] = array_diff( $model::$rules[$name], ['required']);
