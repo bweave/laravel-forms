@@ -55,7 +55,7 @@ class FormBuilder
 					} else {
 						$url = $value;
 					}
-					$value = '<a href="'.esc_attr($url).'">'.esc_body($value).'</a>';
+					$value = '<a href="'.esc_attr($url).'" target="_blank">'.esc_body($value).'</a>';
 					break;
 				case 'email': 
 					$value = '<a href="mailto:'.esc_attr($value).'">'.esc_body($value).'</a>';
@@ -190,7 +190,7 @@ class FormBuilder
 			if(isset($options['url'])) {
 				$callback = $options['url'];
 				$url = $callback($value);
-				$value = '<a href="'.esc_attr($url).'">'.esc_body($value).'</a>';
+				$value = '<a href="'.esc_attr($url).'" target="_blank">'.esc_body($value).'</a>';
 			}
 			$input = 'Current: '.$value;
 			// $model = $this->model;
