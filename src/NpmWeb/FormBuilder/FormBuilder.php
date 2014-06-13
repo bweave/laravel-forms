@@ -19,7 +19,6 @@ class FormBuilder
 	}
 
 	public function setModel( $model ) {
-		Log::debug(__METHOD__.'()');
 		$this->model = $model;
 	}
 
