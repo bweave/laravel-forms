@@ -60,6 +60,9 @@ class FormBuilder
 				case 'email': 
 					$value = '<a href="mailto:'.esc_attr($value).'">'.esc_body($value).'</a>';
 					break;
+				case 'checkbox':
+					$value = $value ? 'Yes' : 'No';
+					break;
 				default: // date/time
 					if( $value ) {
 						$value = $value->format($format);
