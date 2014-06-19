@@ -70,7 +70,7 @@ class FormBuilder
 					break;
 			}
 		}
-		$value = '<div>'.$value.'</div>';
+		$value = '<div><strong>'.$value.'</strong></div>';
 
 		$config = $this->_processOptions($fieldname, $options);
 		return $this->_outputHelper( $fieldname, $config, $value );
