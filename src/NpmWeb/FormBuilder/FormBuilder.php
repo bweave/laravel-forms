@@ -16,6 +16,7 @@ class FormBuilder
 	{
 		parent::__construct($html,$url,$csrfToken);
 		$this->default_col_width = Config::get('form.col_width');
+		$this->default_row_per_field = Config::get('form.row_per_field');
 	}
 
 	public function setModel( $model ) {
@@ -306,6 +307,7 @@ class FormBuilder
 							( isset($options['labelHtml']) ? $options['labelHtml'] : $this->formatLabel($name,null) )
 						);
 		$config->columns_class = ( isset($options['columns_class'] ) ? $options['columns_class'] : $this->default_col_width );
+		$config->row_per_field = ( isset($options['row_per_field'] ) ? $options['row_per_field'] : $this->default_row_per_field );
 		// \Log::debug('processing options for '.$name);
 		$config->extras = array_key_exists('extras',$options)
 			? $options['extras']
@@ -372,8 +374,13 @@ Sample prefixed text input
 		) {
 			$error = $config->errors->first($fieldname);
 		}
+		$rowPerField = false;
+		if( property_exists($config,'row_per_field') ) {
+			$rowPerField = $config->row_per_field;
+		}
 		ob_start();
 		?>
+		<?php if( $rowPerField ): ?><div class="row"><?php endif ?>
 		<div class="<?php echo $config->columns_class ?> columns">
 			<label for="<?php echo $config->extras['id'] ?>" <?php if($error) { echo 'class="error"'; } ?>><?php echo $config->label; ?>
 			<?php if ( isset($config->prefix) ) { ?>
@@ -391,6 +398,7 @@ Sample prefixed text input
 			</div><?php } ?>
 			</label>
 		</div>
+		<?php if( $rowPerField ): ?></div><?php endif ?>
 		<?php
 		return ob_get_clean();
 	}
