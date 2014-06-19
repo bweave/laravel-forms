@@ -19,10 +19,6 @@ class FormBuilder
 		$this->default_row_per_field = Config::get('form.row_per_field');
 	}
 
-	public function setModel( $model ) {
-		$this->model = $model;
-	}
-
 	/**
 	 * Display a field read-only
 	 *
