@@ -1,6 +1,7 @@
 <?php namespace NpmWeb\FormBuilder;
 
 use Config;
+use Illuminate\Database\Eloquent\Model;
 use Log;
 
 class FormBuilder
@@ -40,7 +41,16 @@ class FormBuilder
 		}
 
 		// format data
-		$value = $model->$fieldname;
+		$value = null;
+		if( !is_null($default) ) {
+			$value = $default;
+		} elseif( property_exists($model, $fieldname) ) {
+			$value = $model->$fieldname;
+		} elseif( $model instanceof Model
+			&& array_key_exists( $fieldname, $model->getAttributes())
+		) {
+			$value = $model->$fieldname;
+		}
 		if( array_key_exists('format',$options) ) {
 			$format = $options['format'];
 			switch($format) {
