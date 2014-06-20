@@ -72,6 +72,9 @@ class FormBuilder
 				default: // date/time
 					if( $value ) {
 						$value = $value->format($format);
+						if( !array_key_exists('escape',$options) || true == $options['escape'] ) {
+							$value = esc_body($value);
+						}
 					}
 					break;
 			}
