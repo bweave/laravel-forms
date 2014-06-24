@@ -63,6 +63,15 @@ class FormBuilder
 					}
 					$value = '<a href="'.esc_attr($url).'" target="_blank">'.esc_body($value).'</a>';
 					break;
+				case 'image':
+					if(isset($options['url'])) {
+						$callback = $options['url'];
+						$url = $callback($value);
+					} else {
+						$url = $value;
+					}
+					$value = '<img src="'.esc_attr($url).'" />';
+					break;
 				case 'email': 
 					$value = '<a href="mailto:'.esc_attr($value).'">'.esc_body($value).'</a>';
 					break;
@@ -199,10 +208,23 @@ class FormBuilder
 		$input = '';
 		if( $value ) {
 			$value = $this->getValueAttribute($name,$value);
-			if(isset($options['url'])) {
-				$callback = $options['url'];
-				$url = $callback($value);
-				$value = '<a href="'.esc_attr($url).'" target="_blank">'.esc_body($value).'</a>';
+			if( array_key_exists('format',$options) ) {
+				switch($options['format']) {
+					case 'url': 
+						$callback = $options['url'];
+						$url = $callback($value);
+						$value = '<a href="'.esc_attr($url).'" target="_blank">'.esc_body($value).'</a>';
+						break;
+					case 'image':
+						if(isset($options['url'])) {
+							$callback = $options['url'];
+							$url = $callback($value);
+						} else {
+							$url = $value;
+						}
+						$value = '<img src="'.esc_attr($url).'" />';
+						break;
+					}
 			}
 			$input = 'Current: '.$value;
 			// $model = $this->model;
