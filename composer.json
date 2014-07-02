@@ -5,7 +5,7 @@
 	"require": {
 		"components/foundation": "5.1.*",
 		"laravel/framework": "4.1.*",
-		"npmweb/client-validation-generator": "1.0.*"
+		"npmweb/client-validation-generator": "dev-master@dev"
 	},
 	"require-dev": {
 		"mockery/mockery": "dev-master@dev"
