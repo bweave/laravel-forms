@@ -16,8 +16,8 @@ class FormBuilder
 		$csrfToken)
 	{
 		parent::__construct($html,$url,$csrfToken);
-		$this->default_col_width = Config::get('form.col_width');
-		$this->default_row_per_field = Config::get('form.row_per_field');
+		$this->default_col_width = Config::get('laravel-forms::col_width');
+		$this->default_row_per_field = Config::get('laravel-forms::row_per_field');
 	}
 
 	/**
