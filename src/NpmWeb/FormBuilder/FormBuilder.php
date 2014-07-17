@@ -67,6 +67,7 @@ class FormBuilder
 						$url = $value;
 					}
 					$value = '<a href="'.esc_attr($url).'" target="_blank">'.esc_body($value).'</a>';
+					$options['escape'] = false;
 					break;
 				case 'image':
 					if(isset($options['url'])) {
@@ -76,9 +77,11 @@ class FormBuilder
 						$url = $value;
 					}
 					$value = '<img src="'.esc_attr($url).'" />';
+					$options['escape'] = false;
 					break;
 				case 'email': 
 					$value = '<a href="mailto:'.esc_attr($value).'">'.esc_body($value).'</a>';
+					$options['escape'] = false;
 					break;
 				case 'checkbox':
 					$value = $value ? 'Yes' : 'No';
