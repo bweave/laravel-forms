@@ -50,6 +50,11 @@ class FormBuilder
 			&& array_key_exists( $fieldname, $model->getAttributes())
 		) {
 			$value = $model->$fieldname;
+		} elseif( $model instanceof Model
+			&& method_exists($model, $fieldname)
+		) {
+			// relationship
+			$value = $model->$fieldname;
 		}
 		if( array_key_exists('format',$options) ) {
 			$format = $options['format'];
