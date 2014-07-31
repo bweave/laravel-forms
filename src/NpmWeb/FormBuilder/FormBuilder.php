@@ -76,7 +76,11 @@ class FormBuilder
 					} else {
 						$url = $value;
 					}
-					$value = '<img src="'.esc_attr($url).'" />';
+					if( $value ) {
+						$value = '<img src="'.esc_attr($url).'" />';
+					} else {
+						$value = '(none)';
+					}
 					$options['escape'] = false;
 					break;
 				case 'email': 
