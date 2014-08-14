@@ -515,7 +515,7 @@ Sample prefixed text input
         ob_start();
         ?>
         <?php if( $rowPerField ): ?><div class="row"><?php endif ?>
-            <div class="form-group <?php echo $config->columns_class ?><?php if($error) { echo 'has-error'; } ?>">
+            <div class="form-group <?php echo $config->columns_class ?><?php if($error) { echo ' has-error'; } ?>">
                 <label for="<?php echo $config->extras['id'] ?>"><?php echo $config->label; ?></label>
                 <?php if ( isset($config->prefix) ) { ?>
                 <div class="row collapse <?php if($error) { echo 'error'; } ?>">
