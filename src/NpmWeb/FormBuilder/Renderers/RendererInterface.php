@@ -6,4 +6,6 @@ interface RendererInterface {
 
     public function renderFormControl( $fieldname, $config, $error, $control );
 
+    public function renderCheckboxOrRadio( $fieldname, $config, $error, $control );
+
 }

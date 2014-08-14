@@ -39,4 +39,16 @@ class FoundationBasicGridRenderer implements RendererInterface {
         return ob_get_clean();
     }
 
+    public function renderCheckboxOrRadio( $fieldname, $config, $error, $control ) {
+        ob_start();
+        ?>
+        <div class="<?php echo $config->columns_class ?> columns">
+            <?php echo $control /* pre-escaped */ ?>
+            <label for="<?php echo $fieldname ?>"><?php echo $config->label ?></label>
+        </div>
+
+        <?php
+        return ob_get_clean();
+    }
+
 }
