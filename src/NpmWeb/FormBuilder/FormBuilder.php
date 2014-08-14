@@ -355,11 +355,13 @@ class FormBuilder
     {
         $config = $this->_processOptions($name,$options);
         //$radioHtml = parent::radio($name, $value, $checked, $config->extras);
-        $id = (array_key_exists('id', $config->extras) ? $config->extras['id'] : esc_attr($name.'_'.$value) );
+        if( !array_key_exists('id', $config->extras) ) {
+            $config->extras['id'] = esc_attr($name.'_'.$value);
+        }
         ob_start();
         ?>
             <?php echo parent::hidden( $name, false ) ?>
-            <?php echo parent::checkbox( $name, $value, $checked, $options ) ?>
+            <?php echo parent::checkbox( $name, $value, $checked, $config->extras ) ?>
         <?php
         $control = ob_get_clean();
         return $this->_checkboxOrRadioOutputHelper( $name, $config, $control );

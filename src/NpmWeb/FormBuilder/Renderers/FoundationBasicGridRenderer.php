@@ -40,13 +40,18 @@ class FoundationBasicGridRenderer implements RendererInterface {
     }
 
     public function renderCheckboxOrRadio( $fieldname, $config, $error, $control ) {
+        $rowPerField = false;
+        if( property_exists($config,'row_per_field') ) {
+            $rowPerField = $config->row_per_field;
+        }
         ob_start();
         ?>
-        <div class="<?php echo $config->columns_class ?> columns">
-            <?php echo $control /* pre-escaped */ ?>
-            <label for="<?php echo $fieldname ?>"><?php echo $config->label ?></label>
-        </div>
-
+        <?php if( $rowPerField ): ?><div class="row"><?php endif ?>
+            <div class="<?php echo $config->columns_class ?> columns">
+                <?php echo $control /* pre-escaped */ ?>
+                <label for="<?php echo $fieldname ?>"><?php echo $config->label ?></label>
+            </div>
+        <?php if( $rowPerField ): ?></div><?php endif ?>
         <?php
         return ob_get_clean();
     }
