@@ -21,9 +21,15 @@ You will probably want to change the default configuration. First, publish the p
     
 The following options are available:
 
-- `'css_framework'`: Defaults to `'foundation'` (Foundation 5) but can also be set to `'bootstrap'` (Bootstrap 3). This changes what markup is generated to fit with the given CSS framework's default form layout.
+- `'driver'`: Defaults to `'foundationBasicGrid'` (Foundation 5) but can also be set to `'bootstrapBasicGrid'` (Bootstrap 3). This changes what markup is generated to fit with the given CSS framework's default form layout.
 - `'col_width'`: The grid class for the form field's container element. For example, in Foundation `'large-6'` will make the container take up 6 out of 12 columns.
 - `'row_per_field'`: Defaults to `false`, in which case each form field is outputted directly, and you have to wrap it in a row yourself. If you set it to `true`, each form field container is wrapped in a row, forcing it to be one field per row.
+
+Here's some more information about the included drivers:
+
+- **foundationBasicGrid**: Uses the basic [Foundation form markup](http://foundation.zurb.com/docs/components/forms.html), with a `<label>` tag wrapping the inputs. Layed out within a grid row and column.
+- **bootstrapBasicGrid**: Uses the basic [Bootstrap form markup](http://getbootstrap.com/css/#forms-example), with  a `<label>` tag as a prior-child of the input. Layed out within a grid row and column.
+
 
 Usage
 =====
@@ -31,6 +37,8 @@ Usage
 Just use any of Laravel's normal `Form::` methods, such as `Form::text()` or `Form::select()`. Instead of outputting the bare form control, it will also output the wrapping DOM elements appropriate to your selected CSS framework.
 
 Additionally, a `Form::readonly()` method has been added. This outputs a read-only value wrapped in the same DOM elements, allowing you to include read-only "fields" in your forms.
+
+
 
 License
 =======
