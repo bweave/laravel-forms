@@ -137,7 +137,7 @@ class FormBuilder
         }
         $value = '<div><strong>'.$value.'</strong></div>';
 
-        $config = $this->_processOptions($fieldname, $options);
+        $config = $this->_processOptions($fieldname, 'readonly', $options);
         return $this->_outputHelper( $fieldname, $config, $value );
     }
 
@@ -172,7 +172,7 @@ class FormBuilder
             $default = $value;
         }
 
-        $config = $this->_processOptions($name, $options);
+        $config = $this->_processOptions($name, 'text', $options);
         return $this->_outputHelper( $name, $config, parent::text($name, $default, $config->extras) );
     }
 
@@ -186,7 +186,7 @@ class FormBuilder
     public function password($name, $options = array())
     {
         //Log::debug(__METHOD__.'()');
-        $config = $this->_processOptions($name, $options);
+        $config = $this->_processOptions($name, 'password', $options);
         return $this->_outputHelper( $name, $config,
             parent::password($name, $config->extras) );
     }
@@ -202,7 +202,7 @@ class FormBuilder
     public function email($name, $value = null, $options = array())
     {
         //Log::debug(__METHOD__.'()');
-        $config = $this->_processOptions($name, $options);
+        $config = $this->_processOptions($name, 'email', $options);
         return $this->_outputHelper( $name, $config,
             parent::email($name, $value, $config->extras) );
     }
@@ -218,7 +218,7 @@ class FormBuilder
     public function tel($name, $value = null, $options = array())
     {
         //Log::debug(__METHOD__.'()');
-        $config = $this->_processOptions($name, $options);
+        $config = $this->_processOptions($name, 'tel', $options);
         return $this->_outputHelper( $name, $config,
             parent::input('tel', $name, $value, $config->extras) );
     }
@@ -234,7 +234,7 @@ class FormBuilder
     public function number($name, $value = null, $options = array())
     {
         //Log::debug(__METHOD__.'()');
-        $config = $this->_processOptions($name, $options);
+        $config = $this->_processOptions($name, 'number', $options);
         return $this->_outputHelper( $name, $config,
             parent::input('number', $name, $value, $config->extras) );
     }
@@ -250,7 +250,7 @@ class FormBuilder
     public function file($name, $value = null, $options = array())
     {
         //Log::debug(__METHOD__.'()');
-        $config = $this->_processOptions($name, $options);
+        $config = $this->_processOptions($name, 'file', $options);
         $value = $this->getValueAttribute($name,$value);
         $input = '';
         if( $value ) {
@@ -293,7 +293,7 @@ class FormBuilder
      */
     public function textarea($name, $value = null, $options = array())
     {
-        $config = $this->_processOptions($name, $options);
+        $config = $this->_processOptions($name, 'textarea', $options);
         return $this->_outputHelper( $name, $config,
             parent::textarea($name, $value, $config->extras) );
     }
@@ -309,7 +309,7 @@ class FormBuilder
      */
     public function select($name, $list = array(), $selected = null, $options = array())
     {
-        $config = $this->_processOptions($name,$options);
+        $config = $this->_processOptions($name, 'select', $options);
 
         return $this->_outputHelper( $name, $config, parent::select($name, $list, $selected, $config->extras) );
     }
@@ -325,7 +325,7 @@ class FormBuilder
      */
     public function radio($name, $value = null, $checked = null, $options = array())
     {
-        $config = $this->_processOptions($name,$options);
+        $config = $this->_processOptions($name, 'radio', $options);
         //$radioHtml = parent::radio($name, $value, $checked, $config->extras);
         $id = (array_key_exists('id', $config->extras) ? $config->extras['id'] : esc_attr($name.'_'.$value) );
         ob_start();
@@ -353,7 +353,7 @@ class FormBuilder
      */
     public function checkbox($name, $value = 1, $checked = null, $options = array())
     {
-        $config = $this->_processOptions($name,$options);
+        $config = $this->_processOptions($name, 'checkbox', $options);
         //$radioHtml = parent::radio($name, $value, $checked, $config->extras);
         if( !array_key_exists('id', $config->extras) ) {
             $config->extras['id'] = esc_attr($name.'_'.$value);
@@ -369,7 +369,7 @@ class FormBuilder
 
 
     // go through the options and pull out the pieces we're interested in
-    protected function _processOptions( $name, $options )
+    protected function _processOptions( $name, $type, $options )
     {
         $config = new \stdClass();
         $config->label = ( isset($options['label']) ?
@@ -407,7 +407,7 @@ class FormBuilder
             }
         }
 
-        $config = $this->renderer->processOptions( $config );
+        $config = $this->renderer->processOptions( $config, $type );
 
         return $config;
 

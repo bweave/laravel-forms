@@ -2,7 +2,7 @@
 
 class FoundationBasicGridRenderer implements RendererInterface {
 
-    public function processOptions( $config ) {
+    public function processOptions( $config, $type ) {
         // no changes
         return $config;
     }

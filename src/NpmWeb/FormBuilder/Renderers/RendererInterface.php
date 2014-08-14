@@ -2,7 +2,7 @@
 
 interface RendererInterface {
 
-    public function processOptions( $config );
+    public function processOptions( $config, $type );
 
     public function renderFormControl( $fieldname, $config, $error, $control );
 

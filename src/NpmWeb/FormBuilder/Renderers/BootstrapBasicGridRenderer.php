@@ -2,11 +2,13 @@
 
 class BootstrapBasicGridRenderer implements RendererInterface {
 
-    public function processOptions( $config ) {
-        if( array_key_exists('class',$config->extras) ) {
-            $config->extras['class'] .= ' form-control';
-        } else {
-            $config->extras['class'] = 'form-control';
+    public function processOptions( $config, $type  ) {
+        if( !in_array( $type, array('radio','checkbox','file') ) ) {
+            if( array_key_exists('class',$config->extras) ) {
+                $config->extras['class'] .= ' form-control';
+            } else {
+                $config->extras['class'] = 'form-control';
+            }
         }
         return $config;
     }
