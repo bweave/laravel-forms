@@ -15,18 +15,18 @@ class FoundationBasicGridRenderer implements RendererInterface {
         ob_start();
         ?>
         <?php if( $rowPerField ): ?><div class="row"><?php endif ?>
-            <div class="<?php echo $config->columns_class ?> columns">
-                <label for="<?php echo $config->extras['id'] ?>" <?php if($error) { echo 'class="error"'; } ?>><?php echo $config->label; ?>
+            <div class="<?php echo e($config->columns_class) ?> columns">
+                <label for="<?php echo e($config->extras['id']) ?>" <?php if($error) { echo 'class="error"'; } ?>><?php echo e($config->label) ?>
                 <?php if ( isset($config->prefix) ) { ?>
                     <div class="row collapse <?php if($error) { echo 'error'; } ?>">
-                        <div class="<?php echo $config->prefix['columns_class'] ?> columns">
-                            <span class="prefix"><?php echo $config->prefix['label']; ?></span>
+                        <div class="<?php echo e($config->prefix['columns_class']) ?> columns">
+                            <span class="prefix"><?php echo e($config->prefix['label']); ?></span>
                         </div>
-                        <div class="<?php echo $config->main['columns_class'] ?> columns">
+                        <div class="<?php echo e($config->main['columns_class']) ?> columns">
                 <?php } // end if prefix ?>
                 <?php echo $control /* pre-escaped */ ?>
                 <?php if($error): ?>
-                    <small class="error"><?php echo $error ? esc_body($error) : '' ?></small>
+                    <small class="error"><?php echo $error ? e($error) : '' ?></small>
                 <?php endif ?>
                 <?php if ( isset($config->prefix) ) { ?>
                         </div>
@@ -47,9 +47,9 @@ class FoundationBasicGridRenderer implements RendererInterface {
         ob_start();
         ?>
         <?php if( $rowPerField ): ?><div class="row"><?php endif ?>
-            <div class="<?php echo $config->columns_class ?> columns">
+            <div class="<?php echo e($config->columns_class) ?> columns">
                 <?php echo $control /* pre-escaped */ ?>
-                <label for="<?php echo $fieldname ?>"><?php echo $config->label ?></label>
+                <label for="<?php echo e($fieldname) ?>"><?php echo e($config->label) ?></label>
             </div>
         <?php if( $rowPerField ): ?></div><?php endif ?>
         <?php

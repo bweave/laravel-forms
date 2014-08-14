@@ -21,15 +21,15 @@ class BootstrapBasicGridRenderer implements RendererInterface {
         ob_start();
         ?>
         <?php if( $rowPerField ): ?><div class="row"><?php endif ?>
-            <div class="form-group <?php echo $config->columns_class ?><?php if($error) { echo ' has-error'; } ?>">
-                <label for="<?php echo $config->extras['id'] ?>"><?php echo $config->label; ?></label>
+            <div class="form-group <?php echo e($config->columns_class) ?><?php if($error) { echo ' has-error'; } ?>">
+                <label for="<?php echo e($config->extras['id']) ?>"><?php echo e($config->label) ?></label>
                 <?php if ( isset($config->prefix) ) { ?>
                     <div class="input-group">
                         <div class="input-group-addon">@</div>
                 <?php } // end if prefix ?>
                 <?php echo $control /* pre-escaped */ ?>
                 <?php if($error): ?>
-                    <span class="help-block"><?php echo $error ? esc_body($error) : '' ?></small>
+                    <span class="help-block"><?php echo $error ? e($error) : '' ?></small>
                 <?php endif ?>
                 <?php if ( isset($config->prefix) ) { ?>
                     </div>
@@ -43,10 +43,10 @@ class BootstrapBasicGridRenderer implements RendererInterface {
     public function renderCheckboxOrRadio( $fieldname, $config, $error, $control ) {
         ob_start();
         ?>
-        <div class="<?php echo $config->columns_class ?> checkbox">
+        <div class="<?php echo e($config->columns_class) ?> checkbox">
             <label>
                 <?php echo $control /* pre-escaped */ ?>
-                <?php echo $config->label; ?>
+                <?php echo e($config->label); ?>
             </label>
         </div>
 

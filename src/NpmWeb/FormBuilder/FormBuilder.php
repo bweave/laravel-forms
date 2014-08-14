@@ -101,7 +101,7 @@ class FormBuilder
                     } else {
                         $url = $value;
                     }
-                    $value = '<a href="'.esc_attr($url).'" target="_blank">'.esc_body($value).'</a>';
+                    $value = '<a href="'.e($url).'" target="_blank">'.e($value).'</a>';
                     $options['escape'] = false;
                     break;
                 case 'image':
@@ -112,14 +112,14 @@ class FormBuilder
                         $url = $value;
                     }
                     if( $value ) {
-                        $value = '<img src="'.esc_attr($url).'" />';
+                        $value = '<img src="'.e($url).'" />';
                     } else {
                         $value = '(none)';
                     }
                     $options['escape'] = false;
                     break;
                 case 'email':
-                    $value = '<a href="mailto:'.esc_attr($value).'">'.esc_body($value).'</a>';
+                    $value = '<a href="mailto:'.e($value).'">'.e($value).'</a>';
                     $options['escape'] = false;
                     break;
                 case 'checkbox':
@@ -133,7 +133,7 @@ class FormBuilder
             }
         }
         if( !array_key_exists('escape',$options) || true == $options['escape'] ) {
-            $value = esc_body($value);
+            $value = e($value);
         }
         $value = '<div><strong>'.$value.'</strong></div>';
 
@@ -158,10 +158,10 @@ class FormBuilder
             $value = $this->model->$name;
             switch($format) {
                 case 'url':
-                    $value = '<a href="'.esc_attr($value).'">'.esc_body($value).'</a>';
+                    $value = '<a href="'.e($value).'">'.e($value).'</a>';
                     break;
                 case 'email':
-                    $value = '<a href="mailto:'.esc_attr($value).'">'.esc_body($value).'</a>';
+                    $value = '<a href="mailto:'.e($value).'">'.e($value).'</a>';
                     break;
                 default: // date/time
                     if( $value ) {
@@ -260,7 +260,7 @@ class FormBuilder
                     case 'url':
                         $callback = $options['url'];
                         $url = $callback($value);
-                        $value = '<a href="'.esc_attr($url).'" target="_blank">'.esc_body($value).'</a>';
+                        $value = '<a href="'.e($url).'" target="_blank">'.e($value).'</a>';
                         break;
                     case 'image':
                         if(isset($options['url'])) {
@@ -269,7 +269,7 @@ class FormBuilder
                         } else {
                             $url = $value;
                         }
-                        $value = '<img src="'.esc_attr($url).'" />';
+                        $value = '<img src="'.e($url).'" />';
                         break;
                     }
             }
@@ -327,15 +327,10 @@ class FormBuilder
     {
         $config = $this->_processOptions($name, 'radio', $options);
         //$radioHtml = parent::radio($name, $value, $checked, $config->extras);
-        $id = (array_key_exists('id', $config->extras) ? $config->extras['id'] : esc_attr($name.'_'.$value) );
+        $id = (array_key_exists('id', $config->extras) ? $config->extras['id'] : e($name.'_'.$value) );
         ob_start();
         ?>
-        <div class="<?php echo $config->columns_class ?> columns">
-            <label class="radio">
-                <input type="radio" name="<?php echo $name ?>" value="<?php echo $value ?>" id="<?php echo $config->extras['id'] ?>"<?php if ($checked) echo ' checked="checked"'; ?>><span class="radio"><?php echo $config->label; ?></span>
-            </label>
-        </div>
-
+        <input type="radio" name="<?php echo e($name) ?>" value="<?php echo e($value) ?>" id="<?php echo e($config->extras['id']) ?>"<?php if ($checked) echo ' checked="checked"'; ?>><span class="radio"><?php echo e($config->label); ?></span>
         <?php
         $control = ob_get_clean();
         return $this->_checkboxOrRadioOutputHelper( $name, $config, $control );
@@ -356,7 +351,7 @@ class FormBuilder
         $config = $this->_processOptions($name, 'checkbox', $options);
         //$radioHtml = parent::radio($name, $value, $checked, $config->extras);
         if( !array_key_exists('id', $config->extras) ) {
-            $config->extras['id'] = esc_attr($name.'_'.$value);
+            $config->extras['id'] = $name.'_'.$value;
         }
         ob_start();
         ?>
@@ -373,7 +368,7 @@ class FormBuilder
     {
         $config = new \stdClass();
         $config->label = ( isset($options['label']) ?
-                            esc_body($options['label']) :
+                            e($options['label']) :
                             ( isset($options['labelHtml']) ? $options['labelHtml'] : $this->formatLabel($name,null) )
                         );
         $config->columns_class = ( isset($options['columns_class'] ) ? $options['columns_class'] : $this->default_col_width );
@@ -383,7 +378,7 @@ class FormBuilder
             ? $options['extras']
             : [];
 
-        if (!array_key_exists('id', $config->extras) ) $config->extras['id'] = esc_attr( $name );
+        if (!array_key_exists('id', $config->extras) ) $config->extras['id'] = e( $name );
         if (!array_key_exists('placeholder',$config->extras) ) $config->extras['placeholder'] = $config->label; // configurable?
 
         $config->errors = array_key_exists('errors',$options)
