@@ -325,8 +325,6 @@ class FormBuilder
      */
     public function radio($name, $value = null, $checked = null, $options = array())
     {
-        //Log::debug(__METHOD__.'()');
-
         $config = $this->_processOptions($name,$options);
         //$radioHtml = parent::radio($name, $value, $checked, $config->extras);
         $id = (array_key_exists('id', $config->extras) ? $config->extras['id'] : esc_attr($name.'_'.$value) );
@@ -339,8 +337,8 @@ class FormBuilder
         </div>
 
         <?php
-        return ob_get_clean();
-
+        $control = ob_get_clean();
+        return $this->_checkboxOrRadioOutputHelper( $name, $config, $control );
     }
 
     /**
@@ -355,24 +353,16 @@ class FormBuilder
      */
     public function checkbox($name, $value = 1, $checked = null, $options = array())
     {
-        //Log::debug(__METHOD__.'()');
-
         $config = $this->_processOptions($name,$options);
         //$radioHtml = parent::radio($name, $value, $checked, $config->extras);
         $id = (array_key_exists('id', $config->extras) ? $config->extras['id'] : esc_attr($name.'_'.$value) );
         ob_start();
         ?>
-        <div class="<?php echo $config->columns_class ?> columns">
-            <label class="radio">
-                <?php echo parent::hidden( $name, false ) ?>
-                <?php echo parent::checkbox( $name, $value, $checked, $options ) ?>
-                <span class="radio"><?php echo $config->label; ?></span>
-            </label>
-        </div>
-
+            <?php echo parent::hidden( $name, false ) ?>
+            <?php echo parent::checkbox( $name, $value, $checked, $options ) ?>
         <?php
-        return ob_get_clean();
-
+        $control = ob_get_clean();
+        return $this->_checkboxOrRadioOutputHelper( $name, $config, $control );
     }
 
 
@@ -430,6 +420,17 @@ class FormBuilder
         }
 
         return $this->renderer->renderFormControl($fieldname, $config, $error, $control);
+    }
+
+    protected function _checkboxOrRadioOutputHelper( $fieldname, $config, $control ) {
+        $error = null;
+        if( property_exists($config,'errors')
+            && $config->errors instanceof \Illuminate\Support\MessageBag
+        ) {
+            $error = $config->errors->first($fieldname);
+        }
+
+        return $this->renderer->renderCheckboxOrRadio($fieldname, $config, $error, $control);
     }
 
 }
