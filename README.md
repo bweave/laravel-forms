@@ -3,6 +3,35 @@ laravel-forms
 
 Extends the Laravel FormBuilder object (Form:: facade) to automatically output form fields with Foundation- or Bootstrap-specific wrapping markup around them.
 
+For example, with `foundationBasicGrid` selected, the following call:
+
+    {{ Form::text('name',null,['errors'=>$errors]) }}
+
+Will output:
+
+    <div class="row">
+        <div class="form-group col-md-6 col-md-offset-3">
+            <label for="name">Name</label>
+            <input id="name" placeholder="Name" maxlength="150"
+                class="form-control" name="name" type="text"
+                value="Parent Organization">
+        </div>
+    </div>
+
+If there is a validation error on the field, it will output:
+
+	<div class="row">
+		<div class="form-group col-md-6 col-md-offset-3 has-error">
+            <label for="name">Name</label>
+            <input id="name" placeholder="Name" maxlength="150"
+            	class="form-control" name="name" type="text"
+            	value="">
+            <span class="help-block">The name field is required.</small>
+        </div>
+    </div>
+
+You can easily change the grid column classes, and if you use `bootstrapBasicGrid` the equivalent Bootstrap 3 markup will be used.
+
 Installation
 ============
 
@@ -37,8 +66,6 @@ Usage
 Just use any of Laravel's normal `Form::` methods, such as `Form::text()` or `Form::select()`. Instead of outputting the bare form control, it will also output the wrapping DOM elements appropriate to your selected CSS framework.
 
 Additionally, a `Form::readonly()` method has been added. This outputs a read-only value wrapped in the same DOM elements, allowing you to include read-only "fields" in your forms.
-
-
 
 License
 =======
