@@ -391,8 +391,8 @@ class FormBuilder
 
         $model = $this->model;
         if( !array_key_exists( 'maxlength', $config->extras )
-            && property_exists($model,'rules')
-            && is_array($model::$rules)
+            && ($model && property_exists($model,'rules'))
+            && ($model && is_array($model::$rules))
             && array_key_exists( $name, $model::$rules ) )
         {
             foreach( $model::$rules[$name] as $fieldRule ) {
