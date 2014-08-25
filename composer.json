@@ -1,6 +1,6 @@
 {
   "name": "npmweb/laravel-forms",
-  "description": "Custom form builder utility for Laravel applications",
+  "description": "Extends Laravel's FormBuilder to lay out form elements for Bootstrap or Foundation",
   "type": "library",
   "require": {
     "laravel/framework": "4.1.*",
