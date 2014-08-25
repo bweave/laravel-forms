@@ -3,7 +3,7 @@
   "description": "Extends Laravel's FormBuilder to lay out form elements for Bootstrap or Foundation",
   "type": "library",
   "require": {
-    "laravel/framework": "4.1.*",
+    "laravel/framework": "~4.1",
     "npmweb/client-validation-generator": "1.0.*"
   },
   "suggest": {
