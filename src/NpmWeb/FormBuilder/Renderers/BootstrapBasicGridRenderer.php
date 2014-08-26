@@ -23,11 +23,21 @@ class BootstrapBasicGridRenderer implements RendererInterface {
         <?php if( $rowPerField ): ?><div class="row"><?php endif ?>
             <div class="form-group <?php echo e($config->columns_class) ?><?php if($error) { echo ' has-error'; } ?>">
                 <label for="<?php echo e($config->extras['id']) ?>"><?php echo e($config->label) ?></label>
+
+                <?php if ( isset($config->tooltip) ) { ?>
+                    <span style='margin-left: 4px;' class='glyphicon glyphicon-question-sign' data-toggle="tooltip" data-placement="bottom" title="<?php echo e($config->tooltip) ?>"></span>
+                <?php } ?>
+
                 <?php if ( isset($config->prefix) ) { ?>
                     <div class="input-group">
                         <div class="input-group-addon">@</div>
                 <?php } // end if prefix ?>
                 <?php echo $control /* pre-escaped */ ?>
+
+                <?php if ( isset($config->example) ) { ?>
+                    <span style="font-size:12px; margin-left:4px; margin-top:4px; display:inline-block;"><?php echo e($config->example) ?></small>
+                <?php } // end if prefix ?>
+
                 <?php if($error): ?>
                     <span class="help-block"><?php echo $error ? e($error) : '' ?></small>
                 <?php endif ?>

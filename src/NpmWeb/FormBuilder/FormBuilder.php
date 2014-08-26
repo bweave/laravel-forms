@@ -381,6 +381,7 @@ class FormBuilder
         if (!array_key_exists('id', $config->extras) ) $config->extras['id'] = e( $name );
         if (!array_key_exists('placeholder',$config->extras) ) $config->extras['placeholder'] = $config->label; // configurable?
 
+
         $config->errors = array_key_exists('errors',$options)
             ? $options['errors']
             : null;
@@ -388,6 +389,8 @@ class FormBuilder
         if (array_key_exists('prefix', $options)) $config->prefix = $options['prefix'];
         if (array_key_exists('main', $options)) $config->main = $options['main'];
         if (array_key_exists('postfix', $options)) $config->postfix = $options['postfix'];
+        if (array_key_exists('example', $options)) $config->example = $options['example'];
+        if (array_key_exists('tooltip', $options)) $config->tooltip = $options['tooltip'];
 
         $model = $this->model;
         if( !array_key_exists( 'maxlength', $config->extras )
