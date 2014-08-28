@@ -274,6 +274,9 @@ class FormBuilder
                     }
             }
             $input = 'Current: '.$value;
+            if( isset($options['remove']) && $options['remove'] ) {
+                $input .= '<br /><label>'.parent::checkbox($name.'_remove', 1).' Remove</label>';
+            }
             // $model = $this->model;
             // if already uploaded, not "required" to upload a new one
             // $model::$rules[$name] = array_diff( $model::$rules[$name], ['required']);
