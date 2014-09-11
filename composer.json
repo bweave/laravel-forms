@@ -2,13 +2,14 @@
   "name": "npmweb/laravel-forms",
   "description": "Extends Laravel's FormBuilder to lay out form elements for Bootstrap or Foundation",
   "type": "library",
+  "license": "MIT",
   "require": {
     "laravel/framework": "~4.1",
-    "npmweb/client-validation-generator": "1.0.*"
+    "npmweb/client-validation-generator": "dev-master@dev"
   },
   "suggest": {
-    "components/bootstrap": "3.2.*",
-    "components/foundation": "5.1.*"
+    "components/bootstrap": ">=3.2",
+    "components/foundation": ">=5.1"
   },
   "require-dev": {
     "mockery/mockery": "dev-master@dev"
