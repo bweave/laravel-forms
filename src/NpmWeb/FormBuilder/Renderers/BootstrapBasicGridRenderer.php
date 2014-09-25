@@ -57,6 +57,9 @@ class BootstrapBasicGridRenderer implements RendererInterface {
             <label>
                 <?php echo $control /* pre-escaped */ ?>
                 <?php echo e($config->label); ?>
+                <?php if ( isset($config->tooltip) ) { ?>
+                    <span style='margin-left: 4px;' class='glyphicon glyphicon-question-sign' data-toggle="tooltip" data-placement="top" title="<?php echo e($config->tooltip) ?>"></span>
+                <?php } ?>
             </label>
         </div>
 
