@@ -5,7 +5,7 @@
   "license": "MIT",
   "require": {
     "laravel/framework": "~4.1",
-    "npmweb/client-validation-generator": "dev-master@dev"
+    "npmweb/client-validation-generator": "1.0.*"
   },
   "suggest": {
     "components/bootstrap": ">=3.2",
