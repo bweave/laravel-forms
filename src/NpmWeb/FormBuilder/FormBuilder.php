@@ -417,7 +417,8 @@ class FormBuilder
     protected function _outputHelper( $fieldname, $config, $control ) {
         $error = null;
         if( property_exists($config,'errors')
-            && $config->errors instanceof \Illuminate\Support\MessageBag
+            && ($config->errors instanceof \Illuminate\Support\MessageBag
+                || $config->errors instanceof \Illuminate\Support\ViewErrorBag)
         ) {
             $error = $config->errors->first($fieldname);
         }
@@ -428,7 +429,8 @@ class FormBuilder
     protected function _checkboxOrRadioOutputHelper( $fieldname, $config, $control ) {
         $error = null;
         if( property_exists($config,'errors')
-            && $config->errors instanceof \Illuminate\Support\MessageBag
+            && ($config->errors instanceof \Illuminate\Support\MessageBag
+                || $config->errors instanceof \Illuminate\Support\ViewErrorBag)
         ) {
             $error = $config->errors->first($fieldname);
         }
