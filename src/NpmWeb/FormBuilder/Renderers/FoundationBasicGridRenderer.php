@@ -52,7 +52,12 @@ class FoundationBasicGridRenderer implements RendererInterface {
         <?php if( $rowPerField ): ?><div class="row"><?php endif ?>
             <div class="<?php echo e($config->columns_class) ?> columns">
                 <?php echo $control /* pre-escaped */ ?>
-                <label for="<?php echo e($fieldname) ?>"><?php echo e($config->label) ?></label>
+                <label for="<?php echo e($fieldname) ?>">
+                    <?php echo e($config->label) ?>
+                    <?php if ( isset($config->tooltip) ) { ?>
+                        <span style='margin-left: 4px;' class='has-tip tip-top fi-info' data-tooltip aria-haspopup="true" title="<?php echo e($config->tooltip) ?>"></span>
+                    <?php } ?>
+                </label>
             </div>
         <?php if( $rowPerField ): ?></div><?php endif ?>
         <?php
