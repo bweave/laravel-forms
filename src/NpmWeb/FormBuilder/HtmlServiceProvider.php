@@ -6,6 +6,14 @@ class HtmlServiceProvider
     extends \NpmWeb\ClientValidationGenerator\Laravel\HtmlServiceProvider
 {
 
+    protected $configFilePath;
+
+    public function __construct($app)
+    {
+        parent::__construct($app);
+        $this->configFilePath = __DIR__.'/../../config/config.php';
+    }
+
     /**
      * Bootstrap the application events.
      *
@@ -20,7 +28,13 @@ class HtmlServiceProvider
         // here in case duplicated in the future. If you put the
         // ServiceProvider in a subdir, you have to specify a
         // non-default path
-        $this->package('npmweb/laravel-forms', null, __DIR__.'/../../');
+        $this->publishes([ $this->configFilePath => config_path('forms.php')]);
+    }
+
+    public function register()
+    {
+        $this->mergeConfigFrom( $this->configFilePath, 'forms' );
+        return parent::register();
     }
 
     protected function createFormBuilder($app) {

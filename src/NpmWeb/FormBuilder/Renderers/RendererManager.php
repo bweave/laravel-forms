@@ -4,7 +4,7 @@ use Illuminate\Support\Manager;
 
 class RendererManager extends Manager {
 
-    static $packageName = 'laravel-forms';
+    static $packageName = 'forms';
 
     /**
      * Create a new driver instance.
@@ -48,7 +48,8 @@ class RendererManager extends Manager {
      */
     public function getDefaultDriver()
     {
-        return $this->app['config']->get(self::$packageName.'::driver');
+        $driver = $this->app['config']->get(self::$packageName.'.driver');
+        return $driver;
     }
 
     /**
@@ -59,7 +60,7 @@ class RendererManager extends Manager {
      */
     public function setDefaultDriver($name)
     {
-        $this->app['config']->set(self::$packageName.'::driver', $name);
+        $this->app['config']->set(self::$packageName.'.driver', $name);
     }
 
 }

@@ -16,7 +16,7 @@ class FormBuilder
     private $default_css_framework = 'foundation';
 
     public function __construct(
-        \Illuminate\Html\HtmlBuilder $html,
+        \Collective\Html\HtmlBuilder $html,
         \Illuminate\Routing\UrlGenerator $url,
         $csrfToken,
         RendererInterface $renderer)
@@ -24,9 +24,9 @@ class FormBuilder
         parent::__construct($html,$url,$csrfToken);
         $this->renderer = $renderer;
 
-        $this->default_col_width = Config::get('laravel-forms::col_width');
-        $this->default_row_per_field = Config::get('laravel-forms::row_per_field');
-        $this->default_css_framework = Config::get('laravel-forms::css_framework');
+        $this->default_col_width = Config::get('forms.col_width');
+        $this->default_row_per_field = Config::get('forms.row_per_field');
+        $this->default_css_framework = Config::get('forms.css_framework');
     }
 
     /**

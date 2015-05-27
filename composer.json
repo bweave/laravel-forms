@@ -4,12 +4,8 @@
   "type": "library",
   "license": "MIT",
   "require": {
-    "laravel/framework": "~4.1",
-    "npmweb/client-validation-generator": "dev-master@dev"
-  },
-  "suggest": {
-    "components/bootstrap": ">=3.2",
-    "components/foundation": ">=5.1"
+    "laravel/framework": "~4.1 || ~5.0",
+    "npmweb/client-validation-generator": "dev-laravel5@dev"
   },
   "require-dev": {
     "mockery/mockery": "dev-master@dev"
